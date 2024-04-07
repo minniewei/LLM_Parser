@@ -34,7 +34,7 @@ def ask_log_parser(SourceId, LogFormat, LogMessage):
         "for example for log message : 2015-10-18 18:01:51,963 INFO [main] org.mortbay.log: jetty-6.1.26" +
         "you should output a list : ['<*> <*> <*> <*> <*> <*>: jetty-6.1.26',{ (name in the first <> of log format ex time): [\"2015-10-18\"], (name in the second <> in log format): [\"18:01:51,963\"], (name in the third <> of log format): [\"INFO\"], (name in the forth <> of log format): [\"rdd_2_2\",\"0\"]...}]" +
         "(importment:the output should just a list without any description beside the list。"  +
-        "\"()\" in the json represents a variable, so do not output (name in the first <> of log format ex time)..." +
+        "\"()\" in the json represents a variable, so do not output (name in the first <> of log format ex time) or variable with bracelet..." +
         "<*> represent the place for dynamic variable)" +
         "Log message: " + 
         LogMessage
