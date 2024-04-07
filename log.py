@@ -2,7 +2,6 @@ from chatPDF import connection, ask_log_parser
 import csv
 import re
 import ast
-import json
 class Log():
     def __init__(self, format, name):
         self.name = name    
