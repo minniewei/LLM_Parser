@@ -1,5 +1,4 @@
 import requests
-import re
 
 # Connect to the chatPDF API
 def connection ():
@@ -19,7 +18,6 @@ def connection ():
         'https://api.chatpdf.com/v1/sources/add-file', headers=headers, files=files)
     if response.status_code == 200:
         SourceId = response.json()['sourceId']
-        print('Source ID:', response.json()['sourceId'])
         return SourceId
     else:
         return False
@@ -49,14 +47,12 @@ def reaskQuestion(Source, question):
 def ask_question(SourceId, question):
     while(True):
         if SourceId == -1:
-            print('Error: Source ID is not set')
             return False
 
         headers = {
             'x-api-key': 'sec_A2KRWUa7gi4RER6agfHD8WxTnxV7FMFM',
             "Content-Type": "application/json",
         }
-
         data = {
             'sourceId': SourceId,
             'messages': [

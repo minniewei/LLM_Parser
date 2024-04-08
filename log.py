@@ -30,7 +30,7 @@ class Log():
 
     # Write the title of csv file
     def write_csv_title(self):
-        with open(self.name+'.csv', 'w', newline='') as csvfile:
+        with open("download/"+self.name+'.csv', 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(self.header_items)
 
@@ -41,7 +41,7 @@ class Log():
                 answer = self.ask_question(log)
                 print("answer is:", answer)
                 # oepn the csv file and write the structured log data
-                with open(self.name+'.csv', 'a', newline='') as csvfile:
+                with open("download/"+self.name+'.csv', 'a', newline='') as csvfile:
                     writer = csv.writer(csvfile)
                     templete = answer[0]
                     row_data = []
@@ -68,20 +68,4 @@ class Log():
                 print("here is an error: ", e)  
                 continue
     
-print("Enter the name of log message:")
-Logname = input()
-print("Enter the format of log message:")   
-Logformat = input()   
-
-log = Log(Logformat, Logname)
-log.connection()
-log.write_csv_title()
-
-# Open the log file
-with open("log.txt", 'r') as log_file:
-    # Read the log file line by line
-    for line in log_file:
-        # Remove the newline character at the end of the line
-        log_message = line.strip() 
-        log.write_csv_content(log_message)
 
