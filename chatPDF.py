@@ -50,6 +50,7 @@ def ask_question(SourceId, question):
             return False
 
         headers = {
+            # Provide for testing purposes
             'x-api-key': 'sec_A2KRWUa7gi4RER6agfHD8WxTnxV7FMFM',
             "Content-Type": "application/json",
         }
