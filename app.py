@@ -1,5 +1,5 @@
 from log import Log
-from flask import Flask,  render_template, request, jsonify, send_file
+from flask import Flask,  render_template, request, jsonify, send_file, make_response
 from werkzeug.utils import secure_filename
 import os
 
@@ -18,10 +18,12 @@ ALLOWED_EXTENSIONS = {'log'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# Inex page
 @app.route('/')
 def index():
     return render_template('index.html')
 
+# Upload the log file
 @app.route('/upload', methods=['POST'])
 def upload_file():
     # Check if the post request has the file part
@@ -55,11 +57,23 @@ def upload_file():
                 log.write_csv_content(log_message)
         return 'ok', 200
 
+# Download the log file
 @app.route('/download', methods=['GET'])
 def download_file():
-    filename = "test"
-    return send_file("download/test.csv", as_attachment=True)
+    LogName = request.args.get('LogName')
+    return send_file("download/"+LogName+".csv", as_attachment=True)
 
+@app.route('/download/check', methods=['GET'])
+def check_download_file():
+    log_name = request.args.get('LogName')
+    file_path = "download/" + log_name + ".csv"
+    print(file_path)
+    if os.path.isfile(file_path):
+        # if the file exists, return ok
+        return "ok", 200
+    else:
+        # if the file does not exist, return file not found
+        return "File not found", 404
 
 if __name__ == '__main__':
     app.run(debug=True)

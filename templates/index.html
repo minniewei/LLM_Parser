@@ -28,6 +28,13 @@
   <!-- Template Main CSS File -->
   <link href="/static/css/style.css" rel="stylesheet">
 
+  <!-- Customization CSS --> 
+  <style>
+    .note {
+      color: cadetblue; 
+      line-height: 1;
+    }
+  </style>
   <!-- =======================================================
   * Template Name: OnePage
   * Template URL: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/
@@ -44,19 +51,13 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <h1 class="logo"><a href="index.html">Parser</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="static/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#tryit">TryIt</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto o" href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+          <li><a class="nav-link scrollto" href="#download">Download</a></li>
+          <li><a class="nav-link scrollto o" href="#intruduction">Introduction</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -82,8 +83,8 @@
   <main id="main">
     <!-- ======= About Section ======= -->
     <div class="text-center">
-      <section id="tryit" class="about">
-        <d class="container" data-aos="fade-up">
+      <section id="tryit">
+        <div class="container" data-aos="fade-up">
             <h2>Try it</h2>
             <p>Please upload the log file, and we will convert it into an easily understandable format.</p>
             <!--Input-->
@@ -118,57 +119,49 @@
                 <span class="sr-only"></span>
               </div>
             </div>
-            <!--Wrong-->
-            <p id="wrong" style="display: none; color: red;">Please fill in all the fields</p>
+            <!--message-->
+            <p id="message" style="display: none; color: red;">Please fill in all the fields</p>
             <div>
-              <button type="button" class="btn btn-outline-primary" style="width: 50%;">Download</button>
+              <h3 class="note my-4">Please note</h3>
+              <p class="note">Each log file can only contain a maximum of 15 logs.</p>
+              <p class="note">The file name should be '(LogName).log'</p>
+              <p class="note">The LogFormat should be &lt;Title1&gt;&lt;Title2&gt..., for example:&lt;Date&gt;&lt;Time&gt;&lt;Pid&gt;&lt;Level&gt;&lt;Component&gt;: &lt;Content&gt;.</p>
             </div>
           </div>
         </div>
-      </section><!-- End About Section -->
+      </section>
     </div>
+    <!-- End About Section -->
 
-    <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts section-bg">
-      <div class="container">
-
-        <div class="row justify-content-end">
-
-          <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-              <span data-purecounter-start="0" data-purecounter-end="65" data-purecounter-duration="2" class="purecounter"></span>
-              <p>Happy Clients</p>
+    <!-- ======= Download Section ======= -->
+    <div class="text-center" >
+      <section id="download">
+        <d class="container" data-aos="fade-up">
+            <h2>Download it</h2>
+            <!--Input-->
+            <div class="container my-4">
+              <div class="row justify-content-center">
+                <div class="col-md-6">
+                  <!--Input of LogName-->
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="DownloadLogName" placeholder="DownLogName">
+                  </div>
+                  <div>
+                    <button type="button" onclick="downloadFile()"class="btn btn-outline-primary" style="width: 100%;">Download</button>
+                  </div>
+                </div>
+              </div>
             </div>
+            <!--downloadMessage-->
+            <p id="downloadMessage" class="my-4" style="display: none; color: red;">Please fill in all the fields</p>
           </div>
-
-          <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-              <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="2" class="purecounter"></span>
-              <p>Projects</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-              <span data-purecounter-start="0" data-purecounter-end="30" data-purecounter-duration="2" class="purecounter"></span>
-              <p>Years of experience</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-              <span data-purecounter-start="0" data-purecounter-end="20" data-purecounter-duration="2" class="purecounter"></span>
-              <p>Awards</p>
-            </div>
-          </div>
-
         </div>
-
-      </div>
-    </section><!-- End Counts Section -->
+      </section>
+    </div>
+    <!-- End Download Section -->
 
     <!-- ======= About Video Section ======= -->
-    <section id="about-video" class="about-video">
+    <section id="">
       <div class="container" data-aos="fade-up">
 
         <div class="row">
@@ -490,57 +483,102 @@
   <!--File upload-->
   <script>
     function uploadFile() {
-    const fileInput = document.getElementById('fileInput');
-    const LogName = document.getElementById('LogName').value;
-    const LogFormat = document.getElementById('LogFormat').value;
+      const fileInput = document.getElementById('fileInput');
+      const LogName = document.getElementById('LogName').value;
+      const LogFormat = document.getElementById('LogFormat').value;
 
-    const file = fileInput?fileInput.files[0]:null;
+      const file = fileInput?fileInput.files[0]:null;
 
-    if (file && LogName && LogFormat) {
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('LogName', LogName);
-        formData.append('LogFormat', LogFormat);
+      //Check if the file is exist
+      if (file && LogName && LogFormat) {
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('LogName', LogName);
+          formData.append('LogFormat', LogFormat);
 
-        document.getElementById("loading").style.display = "block";
-        document.getElementById("wrong").style.display = "none";
-
-        fetch('/upload', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (response.ok) {
-                document.getElementById("loading").style.display = "none";
-                var loadingText = document.getElementById("wrong");
-                if (loadingText) {
-                  loadingText.innerHTML = "You can download structured log file now"; 
-                }
-                loadingText.style.display = "block";
-            } else {
-              document.getElementById("loading").style.display = "none";
-                var loadingText = document.getElementById("wrong");
-                if (loadingText) {
-                  loadingText.innerHTML = "Error during file upload"; 
-                }
-                loadingText.style.display = "block";
-            }
-        })
-        .catch(error => {
-          var loadingText = document.getElementById("wrong");
+          //Check if the file name is the same as the LogName
+          if(file.name != LogName+".log") {
+            var loadingText = document.getElementById("message");
             if (loadingText) {
-              loadingText.innerHTML = "Error during file upload"; 
+              loadingText.innerHTML = "Please make sure the file name is the same as the LogName"; 
             }
             loadingText.style.display = "block";
-        });
-    } else {
-        var loadingText = document.getElementById("wrong");
+            return;
+          }
+
+          document.getElementById("loading").style.display = "block";
+          document.getElementById("message").style.display = "none";
+
+          // Send the file to the server
+          fetch('/upload', {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => {
+              if (response.ok) {
+                  document.getElementById("loading").style.display = "none";
+                  var loadingText = document.getElementById("message");
+                  if (loadingText) {
+                    loadingText.innerHTML = "You can download structured log file now"; 
+                  }
+                  loadingText.style.display = "block";
+              } else {
+                document.getElementById("loading").style.display = "none";
+                  var loadingText = document.getElementById("message");
+                  if (loadingText) {
+                    loadingText.innerHTML = "Error during file upload"; 
+                  }
+                  loadingText.style.display = "block";
+              }
+          })
+          .catch(error => {
+            var loadingText = document.getElementById("message");
+              if (loadingText) {
+                loadingText.innerHTML = "Error during file upload"; 
+              }
+              loadingText.style.display = "block";
+          });
+      } else {
+          var loadingText = document.getElementById("message");
+          if (loadingText) {
+            loadingText.innerHTML = "Please fill in all the fields";
+          }
+          loadingText.style.display = "block";
+      }
+      return;
+    }
+
+    function downloadFile() {
+      const LogName = document.getElementById('DownloadLogName').value;
+
+      // Check if the LogName is filled
+      if(!LogName) {
+        var loadingText = document.getElementById("downloadMessage");
         if (loadingText) {
           loadingText.innerHTML = "Please fill in all the fields";
         }
         loadingText.style.display = "block";
+        return;
+      }
+
+      // use fetch to check if the file exists
+      fetch('/download/check?LogName='+LogName)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('File not found');
+          }
+
+          // if the file exists, download it
+          window.location.href = '/download?LogName='+LogName;
+        })
+        .catch(error => {
+          var loadingText = document.getElementById("downloadMessage");
+          if (loadingText) {
+            loadingText.innerHTML = "Error during file download, please check if the file exists "; 
+          }
+          loadingText.style.display = "block";
+        });
     }
-  }
   </script>
 
 </body>
