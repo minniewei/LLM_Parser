@@ -49,7 +49,7 @@ def upload_file():
         log.write_csv_title() 
 
         # Open the log file
-        with open(LogName+".log", 'r') as log_file:
+        with open("uploads/"+LogName+".log", 'r') as log_file:
             # Read the log file line by line
             for line in log_file:
                 # Remove the newline character at the end of the line
@@ -67,7 +67,6 @@ def download_file():
 def check_download_file():
     log_name = request.args.get('LogName')
     file_path = "download/" + log_name + ".csv"
-    print(file_path)
     if os.path.isfile(file_path):
         # if the file exists, return ok
         return "ok", 200

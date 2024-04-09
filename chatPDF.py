@@ -67,7 +67,6 @@ def ask_question(SourceId, question):
             'https://api.chatpdf.com/v1/chats/message', headers=headers, json=data)
 
         if response.status_code == 200:
-            print('Result:', response.json()['content'])
             answer = response.json()['content']
             return answer
 

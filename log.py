@@ -39,7 +39,7 @@ class Log():
         while True:
             try:
                 answer = self.ask_question(log)
-                print("answer is:", answer)
+                print("answer is:\n", answer)
                 # oepn the csv file and write the structured log data
                 with open("download/"+self.name+'.csv', 'a', newline='') as csvfile:
                     writer = csv.writer(csvfile)
@@ -61,7 +61,6 @@ class Log():
                     row_data.append(templete)
                     # write the row data to the csv file
                     writer.writerow(row_data)
-                    print("CSV 文件已創建。")
                 break
             # if the data is wrong, continue to ask the question
             except Exception as e:
