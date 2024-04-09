@@ -1,4 +1,4 @@
-# README Template
+# Log Parser
 
 ![專案封面圖](./readmd_picture/llmParser.png)
 
@@ -31,16 +31,20 @@
 
 python 版本建議為：3.10.11 以上...
 
-### 取得專案
+## 取得專案
 
 ```bash
 git clone https://github.com/minniewei/LLM_Parser.git
 ```
 
+```bash
+cd LLM_Parser
+```
+
 ### 安裝套件
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirement.txt
 ```
 
 ### 開啟專案
